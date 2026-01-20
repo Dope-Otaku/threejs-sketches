@@ -19,14 +19,20 @@ camera.position.z = 2
 const scene = new THREE.Scene()
 
 const geo = new THREE.IcosahedronGeometry(1.0, 2)
-const mat = new THREE.MeshNormalMaterial({wireframe:true})
+const mat = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    flatShading: true
+})
 const mesh = new THREE.Mesh(geo, mat)
 scene.add(mesh)
+
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000)
+scene.add(hemiLight)
 
 
 function animation(t=0){
     requestAnimationFrame(animation)
-    mesh.scale.setScalar(Math.cos(t*0.0001)+1) //animation maths
+    // mesh.scale.setScalar(Math.cos(t*0.0001)+1) //animation maths
     renderer.render(scene, camera)
 }
 animation()
