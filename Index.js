@@ -14,3 +14,10 @@ const aspect = w/h //it's the aspect ratio of scene
 const near = 0.1 // it's the nearest position of camera from where you want the animation to run
 const far = 10 // it's the farthest point where you want the animation to stretch
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
+camera.position.z = 2
+
+const scene = new THREE.Scene()
+
+
+
+renderer.render(scene, camera)
