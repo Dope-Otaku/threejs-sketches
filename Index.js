@@ -1,4 +1,5 @@
 import * as THREE from 'three'; 
+import {OrbitControls} from "jsm/controls/OrbitControls.js"
 
 
 const h = window.innerHeight;
@@ -17,6 +18,12 @@ const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
 camera.position.z = 2
 
 const scene = new THREE.Scene()
+
+//adding an orbit camera
+
+const orbitCamera = new OrbitControls(camera, renderer.domElement)
+orbitCamera.enableDamping = true;
+orbitCamera.dampingFactor = 0.03;
 
 
 // added a default mesh
@@ -52,5 +59,6 @@ function animation(t=0){
     // mesh.scale.setScalar(Math.cos(t*0.0001)+1) //animation maths
     mesh.rotation.y = t * 0.0001
     renderer.render(scene, camera)
+    orbitCamera.update() //adds sometheness in animation on controlling
 }
 animation()
