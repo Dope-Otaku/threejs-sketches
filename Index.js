@@ -18,6 +18,15 @@ camera.position.z = 2
 
 const scene = new THREE.Scene()
 
+const geo = new THREE.IcosahedronGeometry(1.0, 2)
+const mat = new THREE.MeshNormalMaterial({wireframe:true})
+const mesh = new THREE.Mesh(geo, mat)
+scene.add(mesh)
 
 
-renderer.render(scene, camera)
+function animation(t=0){
+    requestAnimationFrame(animation)
+    mesh.scale.setScalar(Math.cos(t*0.0001)+1) //animation maths
+    renderer.render(scene, camera)
+}
+animation()
