@@ -18,6 +18,8 @@ camera.position.z = 2
 
 const scene = new THREE.Scene()
 
+
+// added a default mesh
 const geo = new THREE.IcosahedronGeometry(1.0, 2)
 const mat = new THREE.MeshStandardMaterial({
     color: 0xffffff,
@@ -26,6 +28,20 @@ const mat = new THREE.MeshStandardMaterial({
 const mesh = new THREE.Mesh(geo, mat)
 scene.add(mesh)
 
+
+//added a wiremesh on colored object
+const wireMat = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+    wireframe: true
+})
+
+const wireMesh = new THREE.Mesh(geo, wireMat)
+mesh.add(wireMesh)
+
+
+
+
+
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000)
 scene.add(hemiLight)
 
@@ -33,6 +49,7 @@ scene.add(hemiLight)
 function animation(t=0){
     requestAnimationFrame(animation)
     // mesh.scale.setScalar(Math.cos(t*0.0001)+1) //animation maths
+    mesh.rotation.y = t * 0.0001
     renderer.render(scene, camera)
 }
 animation()
